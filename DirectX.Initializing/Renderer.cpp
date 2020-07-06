@@ -96,7 +96,7 @@ void Renderer::CreateSwapChain(int width, int height)
 	}
 	else
 	{
-		// DirectX 11
+		// DirectX 11 - te
 		DXGI_SWAP_CHAIN_DESC sd = {};
 		sd.BufferCount = 1;
 		sd.BufferDesc.Width = width;

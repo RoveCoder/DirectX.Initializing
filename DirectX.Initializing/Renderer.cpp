@@ -140,15 +140,16 @@ void Renderer::CreateRenderTargetAndDepthStencilView(int width, int height)
 	ID3D11Texture2D* depthStencil;
 	DX::ThrowIfFailed(m_Device->CreateTexture2D(&descDepth, nullptr, &depthStencil));
 	DX::ThrowIfFailed(m_Device->CreateDepthStencilView(depthStencil, nullptr, &m_DepthStencilView));
+	depthStencil->Release();
 
 	m_DeviceContext->OMSetRenderTargets(1, &m_RenderTargetView, m_DepthStencilView);
 }
 
 void Renderer::SetViewport(int width, int height)
 {
-	D3D11_VIEWPORT viewport;
-	viewport.Width = (float)width;
-	viewport.Height = (float)height;
+	D3D11_VIEWPORT viewport = {};
+	viewport.Width = static_cast<float>(width);
+	viewport.Height = static_cast<float>(height);
 	viewport.MinDepth = 0.0f;
 	viewport.MaxDepth = 1.0f;
 	viewport.TopLeftX = 0;
@@ -159,7 +160,7 @@ void Renderer::SetViewport(int width, int height)
 
 HWND Renderer::GetHWND()
 {
-	SDL_SysWMinfo wmInfo;
+	SDL_SysWMinfo wmInfo = {};
 	SDL_GetVersion(&wmInfo.version);
 	SDL_GetWindowWMInfo(m_SdlWindow, &wmInfo);
 	return wmInfo.info.win.window;

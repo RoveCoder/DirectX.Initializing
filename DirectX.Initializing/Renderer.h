@@ -15,7 +15,6 @@ public:
 	void Resize(int width, int height);
 	void Render();
 
-
 private:
 	SDL_Window* m_SdlWindow = nullptr;
 
